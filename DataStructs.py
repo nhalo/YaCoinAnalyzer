@@ -11,7 +11,7 @@ class DataStruct:
 
     def __init__(self):
 
-        self.data           = []
-        self.daily          = []
-        self.totalIncome    = 0.0
-        avgIncomePerDay     = 0.0
+        self.data               = []
+        self.daily              = []
+        self.totalIncome        = 0.0
+        self. avgIncomePerDay   = 0.0

@@ -1,4 +1,4 @@
 YaCoinAnalyzer
 ==============
 
-This tool analysis csv data from the yacoin qt wallet.
+This tool analyzes csv data from the yacoin qt wallet.
