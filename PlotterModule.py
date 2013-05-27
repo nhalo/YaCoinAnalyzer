@@ -56,14 +56,14 @@ def plotBarGraph(yacStruct, plotConfig):
     fig = plt.figure(1)
     
     #Plot bar diagramm
-    plt.bar( d, c_t, color="blue",alpha = 0.75, label="Coins", align='center')
-    plt.xlabel("Day")
-    plt.ylabel("Mined YaCoins per day")
+    p1 = plt.bar( d, c_u, color="red",alpha = 0.75, label="unconfirmed", align='center')
+    p2 = plt.bar( d, c_c, color="blue",alpha = 0.75, label="confirmed", align='center', bottom=c_u)
+    plt.xlabel("Days")
+    plt.ylabel("Mined YaCoins")
     plt.xticks(tmpDays, days)
 
-
-    if showGraphs:
-        plt.show()
+    #Add legend
+    plt.legend()
 
     if saveGraphs:
         pdf_page = PdfPages(plotPath+"YacDailyAmount.pdf")
@@ -74,6 +74,9 @@ def plotBarGraph(yacStruct, plotConfig):
         fig.savefig(plotPath+"YacDailyAmount.svg", transparent=True, bbox_inches='tight')
 
         print("Diagram written to disc!")
+
+    if showGraphs:
+        plt.show()
 
     #histogram
     #cdf
