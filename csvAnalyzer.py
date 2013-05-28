@@ -4,6 +4,7 @@ from csvReader import parseCSV
 from DataAnalyzer import analyzeData
 from OutputModule import outputConsole
 from PlotterModule import plotBarGraph
+from PlotterModule import  plotTransactionsTotal
 import os
 import argparse
 
@@ -23,6 +24,9 @@ def parse_command_line():
                         help='Enables graph plotting and saving to disc')
     parser.add_argument('-pv', '--plot_and_view', action='store_true',
                         help='Enables graph plotting and displaying on screen')
+    parser.add_argument('-fi', '--filter', type=str, nargs='+',
+                        help='Enables a custom filter. Only a coin source with ' 
+                              +'this Label will be used')
 
     return parser.parse_args()
 
@@ -34,8 +38,16 @@ def parse_command_line():
 
 args = parse_command_line()
 
-modes      = ['daily', 'dailyAvg']
-plotGraphs = ['bar']
+modes       = ['daily', 'dailyAvg']
+plotGraphs  = ['bar', 'total_trans']
+
+#If the user did set up a filter with -f , then
+#only these sources will be counted
+usedSources = []
+if args.filter == None:
+    usedSources.append(args.filter)
+else:
+    usedSources = args.filter
 
 #getting the file uri
 fileUri = args.file_uri
@@ -45,6 +57,9 @@ fileUri = os.path.normpath(fileUri)
 
 #set up empty dataStruct
 yacStruct = DataStruct()
+
+#Set up filters
+yacStruct.usedSources = usedSources
 
 #load the csv and build yac object
 parseCSV(fileUri, yacStruct)
@@ -77,3 +92,5 @@ if doPlotAndSave or doPlotAndView:
     for plotGraph in plotGraphs:
         if plotGraph == 'bar':
             plotBarGraph(yacStruct, plotConfig)
+        if plotGraph == 'total_trans':
+            plotTransactionsTotal(yacStruct, plotConfig)

@@ -3,6 +3,7 @@ __author__="nhalo"
 __date__ ="$26.05.2013 03:26:00$"
 
 def parseCSV(fileUri, yacStruct):
+    filters = yacStruct.usedSources
     file = ""
     isTagLine = True
 
@@ -27,4 +28,6 @@ def parseCSV(fileUri, yacStruct):
             if len(dataRowData) == 0:
                 isTagLine = False
             else:
-                yacStruct.data.append(dataRowData)
+                #Use only data the user wants to analze and filter the rest
+                if dataRowData['Label'] in filters or None in filters:
+                    yacStruct.data.append(dataRowData)
