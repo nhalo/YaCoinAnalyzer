@@ -31,21 +31,23 @@ def plotBarGraph(yacStruct, plotConfig):
     amountOfCoinsPerIntervallConfirmed      = []
     amountOfCoinsPerIntervallUnconfirmed    = []
 
-    averageDailyIncome                      = yacStruct.avgIncomePerDay 
+    #averageDailyIncomeTotal                      = yacStruct.avgIncomePerDay 
+    averageDailyIncomeLast14Days                 = yacStruct.avgIncomeLast14Days
 
-    for day in yacStruct.daily:
-        for key, value in day.items():
-            days.append(key)
-            amountOfCoinsPerIntervallTotal.append(value['totalSaldo'])
-            amountOfCoinsPerIntervallConfirmed.append(value['confirmedSaldo'])
-            amountOfCoinsPerIntervallUnconfirmed.append(value['unconfirmedSaldo'])
+    for index, day in enumerate(yacStruct.daily):
+        if index+1 <= plotConfig.length:
+            for key, value in day.items():
+                days.append(key)
+                amountOfCoinsPerIntervallTotal.append(value['totalSaldo'])
+                amountOfCoinsPerIntervallConfirmed.append(value['confirmedSaldo'])
+                amountOfCoinsPerIntervallUnconfirmed.append(value['unconfirmedSaldo'])
 
     #Make np-aray of days
     tmpDays = []
     tmpInc  = []
     for index, day in enumerate(days):
         tmpDays.append(index)
-        tmpInc.append(averageDailyIncome)
+        tmpInc.append(averageDailyIncomeLast14Days)
 
     d = np.array(tmpDays)
 
@@ -78,12 +80,12 @@ def plotBarGraph(yacStruct, plotConfig):
     plt.legend()
 
     if saveGraphs:
-        pdf_page = PdfPages(plotPath+"YacDailyAmount.pdf")
+        pdf_page = PdfPages(plotPath+"YacDailyAmountLast14Days.pdf")
         pdf_page.savefig(bbox_inches='tight')
         pdf_page.close()
         
-        fig.savefig(plotPath+"YacDailyAmount.eps", format="eps")
-        fig.savefig(plotPath+"YacDailyAmount.svg", transparent=True, bbox_inches='tight')
+        fig.savefig(plotPath+"YacDailyAmountLast14Days.eps", format="eps")
+        fig.savefig(plotPath+"YacDailyAmountLast14Days.svg", transparent=True, bbox_inches='tight')
 
         print("Diagram written to disc!")
 

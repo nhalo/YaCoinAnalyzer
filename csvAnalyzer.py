@@ -38,8 +38,9 @@ def parse_command_line():
 
 args = parse_command_line()
 
-modes       = ['daily', 'dailyAvg']
+modes       = ['daily', 'total', 'avg']
 plotGraphs  = ['bar', 'total_trans']
+plotLength  = 14
 
 #If the user did set up a filter with -f , then
 #only these sources will be counted
@@ -86,6 +87,7 @@ if doPlotAndSave or doPlotAndView:
     plotConfig.modes  = modes
     plotConfig.show   = doPlotAndView
     plotConfig.save   = doPlotAndSave
+    plotConfig.length = plotLength
     #plotConfig.graphs = plotGraphs
     
     #Plot data

@@ -11,18 +11,20 @@ if __name__ == "__main__":
 class DataStruct:
     def __init__(self):
 
-        self.data              = []
-        self.daily             = []
-        self.totalIncome       = 0.0
-        self.avgIncomePerDay   = 0.0
-        self.usedSources       = []
+        self.data                   = []
+        self.daily                  = []
+        self.totalIncome            = 0.0
+        self.avgIncomePerDay        = 0.0
+        self.last14DaysTotalIncome  = 0.0
+        self.avgIncomeLast14Days    = 0.0
+        self.usedSources            = []
 
 #Data structure for saving plot config data
 class PlotConfig:
     def __init__(self):
 
-        self.save              = False
-        self.show              = False
-        self.path              = ""
-        self.modes             = []
-        self.graphs            = []
+        self.save                   = False
+        self.show                   = False
+        self.path                   = ""
+        self.modes                  = []
+        self.graphs                 = []

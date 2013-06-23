@@ -15,13 +15,26 @@ def outputConsole(yacStruct, outputType):
         print ""
         print ""
 
-    if outputType == 'dailyAvg':
+    if outputType == 'total':
         print "##########################################################"
-        print "       Average daily income based on total saldo         "
+        print "                     Total income                         "
         print "##########################################################"
         print ""
 
-        print "Daily average income" + " : " + str(yacStruct.avgIncomePerDay)
+        print "Income total" + "        : " + str(yacStruct.totalIncome)
+        print "Income last 14 days" + " : " + str(yacStruct.last14DaysTotalIncome)
+
+        print ""
+        print ""
+
+    if outputType == 'avg':
+        print "##########################################################"
+        print "                    Average income                        "
+        print "##########################################################"
+        print ""
+
+        print "Daily average income total" + "        : " + str(yacStruct.avgIncomePerDay)
+        print "Daily average income last 14 days" + " : " + str(yacStruct.avgIncomeLast14Days)
 
         print ""
         print ""
